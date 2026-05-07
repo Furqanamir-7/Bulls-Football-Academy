@@ -23,7 +23,8 @@ body {
   min-height: 100%;
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
-  background-color: #000000;
+  /* Match light page canvas so no black seam shows at main/footer joins */
+  background-color: #f4eee6;
   background-image:
     radial-gradient(ellipse 90% 55% at 100% 0%, rgba(255, 255, 255, 0.03), transparent 42%),
     radial-gradient(ellipse 85% 50% at 0% 100%, rgba(255, 255, 255, 0.02), transparent 48%),
@@ -56,9 +57,23 @@ body::after {
   );
 }
 
-body > * {
+/* Do not force .site-contact-float to position:relative — it breaks position:fixed and
+   drops the WhatsApp control into document flow (left side + black strip above the footer). */
+body > *:not(.site-contact-float) {
   position: relative;
   z-index: 1;
+}
+
+.site-contact-float {
+  position: fixed !important;
+  top: 50% !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: max(1rem, env(safe-area-inset-right, 0px)) !important;
+  z-index: 70 !important;
+  margin: 0 !important;
+  width: auto !important;
+  max-width: none !important;
 }
 
 .site-main {
@@ -95,6 +110,8 @@ body > * {
 .site-main[data-page-theme="light"] {
   background-color: #ffffff;
   background-image: none;
+  /* Kill any seam where body’s black bg could show between main and footer */
+  border-bottom: 1px solid transparent;
 }
 
 .site-main[data-page-theme="light"]::before {

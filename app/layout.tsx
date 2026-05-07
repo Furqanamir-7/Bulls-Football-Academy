@@ -55,6 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      dir="ltr"
       className={`${inter.variable} ${poppins.variable} h-full scroll-smooth`}
     >
       <body className="min-h-full text-white antialiased">
