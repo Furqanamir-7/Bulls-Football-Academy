@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Add lint-staged or tests here when ready.
+# Left empty so commits are not blocked.

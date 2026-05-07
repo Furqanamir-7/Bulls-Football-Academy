@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# After each commit: push to GitHub so Vercel (Git integration) deploys production.
+# Skip any time: SKIP_AUTO_DEPLOY=1 git commit ...
+# Manual deploy: npm run deploy  (full, with media sync) or npm run deploy:vercel
+
+if [ "$SKIP_AUTO_DEPLOY" = "1" ]; then
+  exit 0
+fi
+
+git push || true

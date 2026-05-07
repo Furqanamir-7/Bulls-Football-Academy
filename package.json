@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "node scripts/sync-program-media.mjs && vercel --prod --yes"
+    "deploy": "node scripts/sync-program-media.mjs && vercel --prod --yes",
+    "deploy:vercel": "npx vercel --prod --yes",
+    "prepare": "husky"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -31,6 +33,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
