@@ -8,4 +8,4 @@ if [ "$SKIP_AUTO_DEPLOY" = "1" ]; then
   exit 0
 fi
 
-git push || true
+git push
