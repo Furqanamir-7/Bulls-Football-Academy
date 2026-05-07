@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #d91f26;
+  --card: #111111;
+  --muted: #a1a1aa;
+  --border: #2a2a2a;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  background-color: #000000;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 100% 0%, rgba(255, 255, 255, 0.03), transparent 42%),
+    radial-gradient(ellipse 85% 50% at 0% 100%, rgba(255, 255, 255, 0.02), transparent 48%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='0.05'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: auto, auto, 140px 140px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(120% 80% at 50% 35%, transparent 62%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.site-main {
+  position: relative;
+  /* Keeps the last section’s bottom margin inside main so it can’t collapse with the footer
+     and expose the body’s black background as a strip above the footer. */
+  display: flow-root;
+  background-color: #000;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 24rem,
+    rgba(255, 255, 255, 0.018) 24rem 34rem
+  );
+}
+
+.site-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0));
+}
+
+.site-main > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light canvas: white main behind page content */
+.site-main[data-page-theme="light"] {
+  background-color: #ffffff;
+  background-image: none;
+}
+
+.site-main[data-page-theme="light"]::before {
+  display: none;
+}
+
+.site-main[data-page-theme="light"] section + section::before {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.07) 15%,
+    rgba(0, 0, 0, 0.07) 85%,
+    transparent 100%
+  );
+}
+
+.site-main section {
+  position: relative;
+}
+
+.site-main section + section::before {
+  content: "";
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 15%,
+    rgba(255, 255, 255, 0.12) 85%,
+    transparent 100%
+  );
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.gradient-red {
+  background: linear-gradient(135deg, #d91f26 0%, #8e0f13 100%);
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}

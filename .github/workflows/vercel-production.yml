@@ -1,0 +1,41 @@
+# Deploys to Vercel when you push to `main` or `master`.
+#
+# Setup (one-time): GitHub repo → Settings → Secrets and variables → Actions → New repository secret:
+#   VERCEL_TOKEN       — create at https://vercel.com/account/tokens
+#   VERCEL_ORG_ID      — value "team_..." from your linked project (.vercel/project.json before gitignore, or Vercel team settings)
+#   VERCEL_PROJECT_ID  — value "prj_..." from Vercel → Project → Settings → General
+#
+# Alternative: In Vercel → Project → Settings → Git, connect this repo. Vercel will deploy on every push
+# without this workflow. If you use both, each push triggers two deployments — pick one.
+
+name: Deploy to Vercel (production)
+
+on:
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: vercel-prod-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Uploads the repo and builds on Vercel (same as local `npx vercel --prod`).
+      - name: Deploy to Vercel (production)
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}

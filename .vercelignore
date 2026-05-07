@@ -1,0 +1,14 @@
+# Keep Vercel CLI uploads small (otherwise node_modules can be 500MB+ and uploads fail).
+node_modules
+.next
+
+# Large local asset folders — not part of the Next.js app bundle.
+Bulls Media
+out
+coverage
+.git
+
+# Logs / local env
+*.log
+.env
+.env.*
